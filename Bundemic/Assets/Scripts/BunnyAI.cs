@@ -16,6 +16,9 @@ public class BunnyAI : MonoBehaviour
     public List<GameObject> fence = new List<GameObject>();
 
     Rigidbody rb;
+    public int moveDirection;
+    public float moveSpeed;
+    public Vector3 movement;
 
     public IDecision currentDecision;
     IDecision BunnyAi;
@@ -38,6 +41,11 @@ public class BunnyAI : MonoBehaviour
             currentDecision = currentDecision.MakeDecision();
         }
         
+    }
+
+    void FixedUpdate()
+    {
+        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
 
     void OnTriggerEnter(Collider other)
@@ -179,7 +187,7 @@ public class AmINearCarrot : IDecision
             }
         }
 
-        if (bunny.carrotSpotted) //check the distance between all carrots and player/collider dependant
+        if (Vector3.Distance(bunny.transform.position, bunny.carrots[index].gameObject.transform.position) < 1.5f) //check the distance between all carrots and player/collider dependant
         {
             value = true;
             this.trueBranch = trueBranch;
@@ -255,8 +263,31 @@ public class GoToCarrot : IDecision
 
     public IDecision MakeDecision()
     {
+        float minDistance = Mathf.Infinity;
+        float newDist = 0;
+        int index = 0;
+
+        for (int i = 0; i < bunny.carrots.Capacity; i++)
+        {
+            newDist = Vector3.Distance(bunny.transform.position, bunny.carrots[i].gameObject.transform.position); // looks for the distance betw bunny and all carrots
+
+            if (newDist < minDistance)
+            {
+                minDistance = newDist;
+                index = i;
+            }
+        }
         //move to carrot
         //checks coordinates to see if the carrots z is higher than its own z. same thing with x.
+
+        if (bunny.transform.position.z < bunny.carrots[index].gameObject.transform.position.z)
+            bunny.movement.z = 1; //move up
+        else if(bunny.transform.position.z > bunny.carrots[index].gameObject.transform.position.z)
+            bunny.movement.z = -1; //move down
+        else if (bunny.transform.position.x < bunny.carrots[index].gameObject.transform.position.x)
+            bunny.movement.x = 1; //move right
+        else if (bunny.transform.position.x > bunny.carrots[index].gameObject.transform.position.x)
+            bunny.movement.x = -1; //move left
 
         return null;
     }
@@ -314,10 +345,16 @@ public class KeepWalking : IDecision
 
     public IDecision MakeDecision()
     {
-        if(bunny.idleTimer <= 0)
+        if (bunny.idleTimer <= 0)
         {
+            int newDirection = bunny.moveDirection;
+            while (newDirection == bunny.moveDirection)
+            {
+                // rng goes here
+                newDirection = Random.Range(0, 4);
+            }
             //changes its target position of travel here
-            if(bunny.stepTimer <= 0)
+            if (bunny.stepTimer <= 0)
             {
                 bunny.idleTimer = bunny.startIdleTimer;
                 bunny.stepTimer = bunny.startStepTimer;
@@ -325,8 +362,27 @@ public class KeepWalking : IDecision
             else
             {
                 bunny.stepTimer -= Time.deltaTime;
+                if (newDirection == 0)
+                {
+                    bunny.movement.z = 1;
+                }
+                else if (newDirection == 1)
+                {
+                    bunny.movement.z = -1;
+
+                }
+                else if (newDirection == 2)
+                {
+                    bunny.movement.x = 1;
+
+                }
+                else if (newDirection == 3)
+                {
+                    bunny.movement.x = -1;
+
+                }
                 //make the bunny move around here
-                
+
             }
         }
         else
@@ -336,4 +392,5 @@ public class KeepWalking : IDecision
 
         return null;
     }
+    
 }
