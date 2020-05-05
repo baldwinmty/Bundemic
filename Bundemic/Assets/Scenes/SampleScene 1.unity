@@ -498,6 +498,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 402418470502742257, guid: 8bbf7552248957443a76303c84515b4b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 745394375104891334, guid: ba78fef0a8f4e5241b86c51f0f5195e7,
+        type: 3}
     - target: {fileID: 402418470814631754, guid: 8bbf7552248957443a76303c84515b4b,
         type: 3}
       propertyPath: m_LocalPosition.z
