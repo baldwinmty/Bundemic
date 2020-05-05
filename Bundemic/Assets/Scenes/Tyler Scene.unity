@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1750,6 +1750,12 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 402418472609904077, guid: 8bbf7552248957443a76303c84515b4b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1973109456474152909, guid: 57d2342da5fc9134ea8784d7e4d26ec1,
+        type: 3}
     - target: {fileID: 3302039934962773376, guid: 8bbf7552248957443a76303c84515b4b,
         type: 3}
       propertyPath: m_Name
@@ -4982,7 +4988,7 @@ PrefabInstance:
     - target: {fileID: 8288568228580469258, guid: feb57a6b010dfc64c9f1ae06dd208732,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8288568228580469258, guid: feb57a6b010dfc64c9f1ae06dd208732,
         type: 3}
@@ -9279,6 +9285,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2097291660}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2104874648
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 1476428391}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2104874649}
+  m_Layer: 0
+  m_Name: Fence 1 (Missing Prefab)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2104874649
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 1476428391}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104874648}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2115766279
 PrefabInstance:
   m_ObjectHideFlags: 0

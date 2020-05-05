@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 381411341951993557}
   - component: {fileID: 8651429346014510307}
   - component: {fileID: 3111006906242449434}
+  - component: {fileID: -6121529040533065703}
   m_Layer: 0
   m_Name: Fence 3
   m_TagString: Untagged
@@ -79,3 +80,21 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &-6121529040533065703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3679531333912917190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e34c505984f4114daf8135178b81ec9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DegradingHealth: 1
+  startingTime: 3
+  health: 20
+  Damage: 10
+  Injured: {fileID: 4998346029732878361, guid: feb57a6b010dfc64c9f1ae06dd208732, type: 3}
+  Destroyed: {fileID: 3679531333912917190}
