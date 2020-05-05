@@ -9,4 +9,15 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("Tyler Scene");
     }
+
+    public void Credits ()
+    {
+        SceneManager.LoadScene("Credits Scene");
+    }
+
+    public void QuitGame ()
+    {
+        Debug.Log("Quit!");
+        Application.Quit();
+    }
 }
