@@ -478,7 +478,7 @@ MonoBehaviour:
         m_MethodName: ChangeActiveObstacle
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 5045466859186398872, guid: f8778a9ed020b8b4baa471513f253c3e,
+          m_ObjectArgument: {fileID: 745394375104891334, guid: 84217fb0e2ce4924ca87cb0efa28fd2b,
             type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
