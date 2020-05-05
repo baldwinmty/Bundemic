@@ -355,7 +355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c270d260e93ab0f4cbc30ba6fddef8b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentObstacle: {fileID: 3658440665015133473, guid: 7708d2f2be7005e4280dff86f518011c,
+  currentObstacle: {fileID: 5045466859186398872, guid: f8778a9ed020b8b4baa471513f253c3e,
     type: 3}
 --- !u!1 &402418471150010769
 GameObject:
@@ -633,7 +633,7 @@ MonoBehaviour:
         m_MethodName: ChangeActiveObstacle
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 3658440665015133473, guid: 7708d2f2be7005e4280dff86f518011c,
+          m_ObjectArgument: {fileID: 5045466859186398872, guid: f8778a9ed020b8b4baa471513f253c3e,
             type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
