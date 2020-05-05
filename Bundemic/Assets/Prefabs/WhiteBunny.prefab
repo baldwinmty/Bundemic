@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7699784672396421924}
   - component: {fileID: 7151814709602088453}
   - component: {fileID: 1359219255678211394}
+  - component: {fileID: 4370264586767484542}
   m_Layer: 0
   m_Name: WhiteBunny
   m_TagString: Untagged
@@ -102,3 +103,33 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4370264586767484542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2760727620672008180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a4d9af663e5824a9ff3652db2af9ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthyBunny: 1
+  vaccinatedBunny: 0
+  carrotSpotted: 0
+  trapped: 0
+  stepTimer: 0
+  idleTimer: 0
+  biteTimer: 0
+  carrotTimer: 0
+  startStepTimer: 0
+  startIdleTimer: 0
+  startBiteTimer: 0
+  startCarrotTimer: 0
+  carrots: []
+  fence: []
+  moveDirection: 0
+  newDirection: 0
+  moveSpeed: 0
+  movement: {x: 0, y: 0, z: 0}
