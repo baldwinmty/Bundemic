@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 3111006906242449434}
   - component: {fileID: -6121529040533065703}
   m_Layer: 0
-  m_Name: fenceBrokenRotated
-  m_TagString: Untagged
+  m_Name: fenceStage3
+  m_TagString: Fence
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

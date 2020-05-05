@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5792117300626905064}
   - component: {fileID: 242405568156347153}
   m_Layer: 0
-  m_Name: Fence 1
-  m_TagString: Untagged
+  m_Name: fencePrefab
+  m_TagString: Fence
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -98,6 +98,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Greens 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3753914853212584843, guid: 8d52c42b2d9c70446a533fa02ac78b72,
+        type: 3}
+      propertyPath: m_TagString
+      value: Carrot
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d52c42b2d9c70446a533fa02ac78b72, type: 3}
 --- !u!4 &6313598716570670832 stripped

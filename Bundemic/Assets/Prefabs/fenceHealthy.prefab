@@ -62,6 +62,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fenceHealthy
       objectReference: {fileID: 0}
+    - target: {fileID: 1973109456474152909, guid: 57d2342da5fc9134ea8784d7e4d26ec1,
+        type: 3}
+      propertyPath: m_TagString
+      value: Fence
+      objectReference: {fileID: 0}
     - target: {fileID: 3259125363729362398, guid: 57d2342da5fc9134ea8784d7e4d26ec1,
         type: 3}
       propertyPath: m_LocalPosition.x
