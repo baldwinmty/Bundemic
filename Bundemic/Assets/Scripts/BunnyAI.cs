@@ -17,6 +17,7 @@ public class BunnyAI : MonoBehaviour
 
     Rigidbody rb;
     public int moveDirection;
+    public int newDirection;
     public float moveSpeed;
     public Vector3 movement;
 
@@ -28,15 +29,18 @@ public class BunnyAI : MonoBehaviour
     {
         vaccinatedBunny = false;
         rb = GetComponent<Rigidbody>();
+        biteTimer = startBiteTimer;
+        stepTimer = startStepTimer;
+        idleTimer = startIdleTimer;
+        carrotTimer = startCarrotTimer;
+        BunnyAi = new DidIMeetFence(new BiteFence(this), new DoISeeCarrot(new AmINearCarrot(new EatCarrot(this), new GoToCarrot(this), this), new KeepWalking(this), this), this);
     }
 
     private void Update()
     {
-        BunnyAi = new DidIMeetFence(new BiteFence(this), new DoISeeCarrot(new AmINearCarrot(new EatCarrot(this), new GoToCarrot(this), this), new KeepWalking(this), this), this);
-
         currentDecision = BunnyAi;
 
-        if (currentDecision != null)
+        while (currentDecision != null)
         {
             currentDecision = currentDecision.MakeDecision();
         }
@@ -50,7 +54,7 @@ public class BunnyAI : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "carrot") // may change later
+        if (other.gameObject.CompareTag("Carrot")) // may change later
         {
             fence.Add(other.gameObject);
             carrotSpotted = true;
@@ -59,7 +63,7 @@ public class BunnyAI : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "carrot") // may change later
+        if (other.gameObject.CompareTag("Carrot")) // may change later
         {
             fence.Remove(other.gameObject);
         }
@@ -67,13 +71,13 @@ public class BunnyAI : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Rabbit" && !healthyBunny && collision.gameObject.GetComponent<BunnyAI>().vaccinatedBunny) // when this sick bunny makes contact with another healthy bunny
+        if(collision.gameObject.CompareTag("Bunny") && !healthyBunny && collision.gameObject.GetComponent<BunnyAI>().vaccinatedBunny) // when this sick bunny makes contact with another healthy bunny
         {
             collision.gameObject.GetComponent<BunnyAI>().healthyBunny = false;
 
         }
 
-        if(collision.gameObject.name == "Fence") // may change later
+        if(collision.gameObject.CompareTag("Fence")) // may change later
         {
             fence.Add(collision.gameObject);
             trapped = true;
@@ -82,7 +86,7 @@ public class BunnyAI : MonoBehaviour
 
     void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.tag == "Fence") // may change later
+        if (collision.gameObject.CompareTag("Fence")) // may change later
         {
             fence.Remove(collision.gameObject);
             trapped = true;
@@ -187,10 +191,19 @@ public class AmINearCarrot : IDecision
             }
         }
 
-        if (Vector3.Distance(bunny.transform.position, bunny.carrots[index].gameObject.transform.position) < 1.5f) //check the distance between all carrots and player/collider dependant
+        if (bunny.carrots.Count > 0)
         {
-            value = true;
-            this.trueBranch = trueBranch;
+            if (Vector3.Distance(bunny.transform.position, bunny.carrots[index].gameObject.transform.position) < 1.5f) //check the distance between all carrots and player/collider dependant
+            {
+                value = true;
+                this.trueBranch = trueBranch;
+            }
+            else
+            {
+                value = false;
+                this.falseBranch = falseBranch;
+            }
+
         }
         else
         {
@@ -347,49 +360,35 @@ public class KeepWalking : IDecision
     {
         if (bunny.idleTimer <= 0)
         {
-            int newDirection = bunny.moveDirection;
-            while (newDirection == bunny.moveDirection)
-            {
-                // rng goes here
-                newDirection = Random.Range(0, 4);
-            }
             //changes its target position of travel here
             if (bunny.stepTimer <= 0)
             {
                 bunny.idleTimer = bunny.startIdleTimer;
                 bunny.stepTimer = bunny.startStepTimer;
+
+                bunny.newDirection = bunny.moveDirection;
+                while (bunny.newDirection == bunny.moveDirection)
+                {
+                    // rng goes here
+                    bunny.moveDirection = Random.Range(0, 4);
+                }
+
+                bunny.movement = Vector3.zero;
+
+                if (bunny.moveDirection == 0)
+                    bunny.movement.z = 1;
+                else if (bunny.moveDirection == 1)
+                    bunny.movement.z = -1;
+                else if (bunny.moveDirection == 2)
+                    bunny.movement.x = 1;
+                else if (bunny.moveDirection == 3)
+                    bunny.movement.x = -1;
             }
             else
-            {
                 bunny.stepTimer -= Time.deltaTime;
-                if (newDirection == 0)
-                {
-                    bunny.movement.z = 1;
-                }
-                else if (newDirection == 1)
-                {
-                    bunny.movement.z = -1;
-
-                }
-                else if (newDirection == 2)
-                {
-                    bunny.movement.x = 1;
-
-                }
-                else if (newDirection == 3)
-                {
-                    bunny.movement.x = -1;
-
-                }
-                //make the bunny move around here
-
-            }
         }
         else
-        {
             bunny.idleTimer -= Time.deltaTime;
-        }
-
         return null;
     }
     
