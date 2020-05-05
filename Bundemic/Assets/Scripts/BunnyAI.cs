@@ -12,9 +12,6 @@ public class BunnyAI : MonoBehaviour
     public float stepTimer, idleTimer, biteTimer, carrotTimer;
     public float startStepTimer, startIdleTimer, startBiteTimer, startCarrotTimer;
 
-    //GameObject[] carrots = new GameObject[0];
-    //GameObject[] fence = new GameObject[0];
-
     public List<GameObject> carrots = new List<GameObject>();
     public List<GameObject> fence = new List<GameObject>();
 
@@ -32,7 +29,7 @@ public class BunnyAI : MonoBehaviour
 
     private void Update()
     {
-        BunnyAi = new AmITrapped(new BiteFence(this), new DoISeeCarrot(new AmINearCarrot(new EatCarrot(this), new GoToCarrot(this), this), new KeepWalking(this), this), this);
+        BunnyAi = new DidIMeetFence(new BiteFence(this), new DoISeeCarrot(new AmINearCarrot(new EatCarrot(this), new GoToCarrot(this), this), new KeepWalking(this), this), this);
 
         currentDecision = BunnyAi;
 
@@ -45,44 +42,42 @@ public class BunnyAI : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.name == "Fence") // may change later
-        {
-            fence.Add(other.gameObject);
-            //add fence into array
-            trapped = true;
-        }
         if (other.gameObject.name == "carrot") // may change later
         {
             fence.Add(other.gameObject);
-
-            //add fence into carrot
-
+            carrotSpotted = true;
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.name == "Fence") // may change later
+        if (other.gameObject.tag == "carrot") // may change later
         {
             fence.Remove(other.gameObject);
-            //add fence into array
-            trapped = true;
-        }
-        if (other.gameObject.name == "carrot") // may change later
-        {
-            fence.Remove(other.gameObject);
-
-            //add fence into carrot
-
         }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.name == "Normal Rabbit" && !healthyBunny && collision.gameObject.GetComponent<BunnyAI>().vaccinatedBunny) // when this sick bunny makes contact with another healthy bunny
+        if(collision.gameObject.tag == "Rabbit" && !healthyBunny && collision.gameObject.GetComponent<BunnyAI>().vaccinatedBunny) // when this sick bunny makes contact with another healthy bunny
         {
             collision.gameObject.GetComponent<BunnyAI>().healthyBunny = false;
 
+        }
+
+        if(collision.gameObject.name == "Fence") // may change later
+        {
+            fence.Add(collision.gameObject);
+            trapped = true;
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Fence") // may change later
+        {
+            fence.Remove(collision.gameObject);
+            trapped = true;
         }
     }
 }
@@ -92,13 +87,13 @@ public interface IDecision
     IDecision MakeDecision();
 }
 
-public class AmITrapped : IDecision
+public class DidIMeetFence : IDecision
 {
     bool value;
     IDecision trueBranch;
     IDecision falseBranch;
 
-    public AmITrapped(IDecision trueBranch, IDecision falseBranch, BunnyAI bunny)
+    public DidIMeetFence(IDecision trueBranch, IDecision falseBranch, BunnyAI bunny)
     {
         if (bunny.trapped) //collider dependant
         {
@@ -168,6 +163,22 @@ public class AmINearCarrot : IDecision
 
     public AmINearCarrot(IDecision trueBranch, IDecision falseBranch, BunnyAI bunny)
     {
+
+        float minDistance = Mathf.Infinity;
+        float newDist = 0;
+        int index = 0;
+
+        for (int i = 0; i < bunny.carrots.Capacity; i++)
+        {
+            newDist = Vector3.Distance(bunny.transform.position, bunny.carrots[i].gameObject.transform.position); // looks for the distance betw bunny and all carrots
+
+            if (newDist < minDistance)
+            {
+                minDistance = newDist;
+                index = i;
+            }
+        }
+
         if (bunny.carrotSpotted) //check the distance between all carrots and player/collider dependant
         {
             value = true;
@@ -204,9 +215,26 @@ public class BiteFence : IDecision
 
     public IDecision MakeDecision()
     {
-        if(bunny.biteTimer <= 0)
+
+        float minDistance = Mathf.Infinity;
+        float newDist = 0;
+        int index = 0;
+
+        for (int i = 0; i < bunny.fence.Capacity; i++)
+        {
+            newDist = Vector3.Distance(bunny.transform.position, bunny.fence[i].gameObject.transform.position); // looks for the distance betw bunny and all carrots
+
+            if (newDist < minDistance)
+            {
+                minDistance = newDist;
+                index = i;
+            }
+        }
+
+        if (bunny.biteTimer <= 0)
         {
             // fence takes damage
+            //bunny.fence[index].GetComponent<>().
             bunny.biteTimer = bunny.startBiteTimer;
         }
         else
@@ -228,6 +256,7 @@ public class GoToCarrot : IDecision
     public IDecision MakeDecision()
     {
         //move to carrot
+        //checks coordinates to see if the carrots z is higher than its own z. same thing with x.
 
         return null;
     }
@@ -243,10 +272,28 @@ public class EatCarrot : IDecision
 
     public IDecision MakeDecision()
     {
-        //eat carrot with a timer
+        float minDistance = Mathf.Infinity;
+        float newDist = 0;
+        int index = 0;
+
+        for (int i = 0; i < bunny.carrots.Capacity; i++)
+        {
+            newDist = Vector3.Distance(bunny.transform.position, bunny.carrots[i].gameObject.transform.position); // looks for the distance betw bunny and all carrots
+
+            if (newDist < minDistance)
+            {
+                minDistance = newDist;
+                index = i;
+            }
+        }
+
+
         if(bunny.carrotTimer <= 0)
         {
             // carrot takes damage
+
+            //bunny.carrots[index].GetComponent<>().
+
             bunny.carrotTimer = bunny.startCarrotTimer;
         }
         else
