@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8540884625224338625}
   - component: {fileID: 5335567943983853027}
   - component: {fileID: 7268709062042738111}
+  - component: {fileID: 8885078904541478043}
   m_Layer: 0
   m_Name: RotatedWall
   m_TagString: Untagged
@@ -93,3 +94,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8885078904541478043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9196351207608057678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e34c505984f4114daf8135178b81ec9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DegradingHealth: 1
+  startingTime: 3
+  health: 100
+  Damage: 10
+  Injured: {fileID: 4998346029732878361, guid: feb57a6b010dfc64c9f1ae06dd208732, type: 3}
+  Destroyed: {fileID: 3679531333912917190, guid: ea4ab07cf8051dd44bacd58aadcd91a0,
+    type: 3}
