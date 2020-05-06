@@ -26,6 +26,7 @@ public class BunnyAI : MonoBehaviour
     public float moveSpeed;
     public Vector3 movement;
     public Vector3 movementSave;
+    int infectionMark = 0;
 
     public IDecision currentDecision;
     IDecision BunnyAi;
@@ -47,7 +48,6 @@ public class BunnyAI : MonoBehaviour
 
     private void Update()
     {
-        int infectionMark = 0;
         totalBunnies = GameObject.FindGameObjectsWithTag("Bunny");
 
         for (int i = 0; i < totalBunnies.Length; i++)
