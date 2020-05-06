@@ -53,7 +53,7 @@ public class BunnyAI : MonoBehaviour
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-        if (stepTimer > 0 || idleTimer < 0)
+        if (stepTimer > 0 || idleTimer > 0)
         {
             animator.SetBool("Jumping", false);
             animator.SetBool("Idling", true);
@@ -66,6 +66,10 @@ public class BunnyAI : MonoBehaviour
         if(!healthyBunny)
         {
             animator.SetBool("Healthy", false);
+        }
+        if (idleTimer < 0)
+        {
+            animator.SetBool("GettingInfected", false);
         }
     }
 
@@ -91,8 +95,9 @@ public class BunnyAI : MonoBehaviour
         // when this sick bunny makes contact with another healthy bunny
         if(collision.gameObject.CompareTag("Bunny") && !healthyBunny && !collision.gameObject.GetComponent<BunnyAI>().vaccinatedBunny && collision.gameObject.GetComponent<BunnyAI>().healthyBunny)
         {
+            collision.gameObject.GetComponent<BunnyAI>().idleTimer = 2;
             collision.gameObject.GetComponent<BunnyAI>().healthyBunny = false;
-
+            collision.gameObject.GetComponent <Animator>().SetBool("GettingInfected", true);
         }
 
         if(collision.gameObject.CompareTag("Fence")) // may change later
