@@ -11,6 +11,7 @@ public class BunnyAI : MonoBehaviour
     public bool trapped;
     public AudioSource hop;
     public AudioClip sneeze;
+    public ParticleSystem infect;
 
     public float stepTimer, idleTimer, biteTimer, carrotTimer;
     public float startStepTimer, startIdleTimer, startBiteTimer, startCarrotTimer;
@@ -104,6 +105,7 @@ public class BunnyAI : MonoBehaviour
             collision.gameObject.GetComponent<BunnyAI>().idleTimer = 2;
             collision.gameObject.GetComponent<BunnyAI>().healthyBunny = false;
             collision.gameObject.GetComponent <Animator>().SetBool("GettingInfected", true);
+            infect.Play();
             AudioSource.PlayClipAtPoint(sneeze, transform.position);
         }
 
