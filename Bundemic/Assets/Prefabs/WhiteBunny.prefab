@@ -128,7 +128,7 @@ MonoBehaviour:
   biteTimer: 0
   carrotTimer: 0
   startStepTimer: 0.6
-  startIdleTimer: 2
+  startIdleTimer: 1
   startBiteTimer: 5
   startCarrotTimer: 5
   carrots: []
