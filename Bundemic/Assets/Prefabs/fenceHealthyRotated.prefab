@@ -143,7 +143,7 @@ MonoBehaviour:
   DegradingHealth: 1
   startingTime: 1
   health: 100
-  Damage: 1
+  Damage: 5
   Injured: {fileID: 1913285183142151819, guid: b178ad2492bd45f44b92c8bf09f65067, type: 3}
   Destroyed: {fileID: 4882278455882991080, guid: c2b6d25cf8e343e469309bff86db1cd2,
     type: 3}
