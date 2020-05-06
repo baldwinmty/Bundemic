@@ -12,7 +12,12 @@ public class MainMenu : MonoBehaviour
 
     public void Credits ()
     {
-        SceneManager.LoadScene("Credits Scene");
+        SceneManager.LoadScene("credits");
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("GC mainmenu scene");
     }
 
     public void QuitGame ()
