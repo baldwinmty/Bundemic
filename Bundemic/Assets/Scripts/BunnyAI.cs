@@ -412,6 +412,11 @@ public class KeepWalking : IDecision
             }
             else
                 bunny.stepTimer -= Time.deltaTime;
+            if (bunny.stepTimer == 0)
+            {
+                bunny.animator.SetBool("Jumping", false);
+                bunny.animator.SetBool("Idling", true);
+            }
         }
         else
             bunny.idleTimer -= Time.deltaTime;
