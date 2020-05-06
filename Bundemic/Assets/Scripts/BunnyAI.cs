@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BunnyAI : MonoBehaviour
 {
+    public Animator animator;
     public bool healthyBunny, vaccinatedBunny;
     public bool carrotSpotted;
     public bool trapped;
@@ -27,6 +28,8 @@ public class BunnyAI : MonoBehaviour
 
     private void Start()
     {
+        animator.GetComponent<Animator>();
+        animator.SetBool("Healthy", true);
         vaccinatedBunny = false;
         rb = GetComponent<Rigidbody>();
         biteTimer = startBiteTimer;
@@ -357,6 +360,7 @@ public class KeepWalking : IDecision
 
     public IDecision MakeDecision()
     {
+        
         if (bunny.idleTimer <= 0)
         {
             //changes its target position of travel here
@@ -376,21 +380,33 @@ public class KeepWalking : IDecision
                 if (bunny.moveDirection == 0) // move up
                 {
                     bunny.movement.z = 1;
+                    bunny.animator.SetBool("Jumping", true);
+                    bunny.animator.SetBool("Idling", false);
+                    bunny.animator.SetInteger("Direction", 0);
 
                 }
                 else if (bunny.moveDirection == 1)
                 {
                     bunny.movement.z = -1; // move down
+                    bunny.animator.SetBool("Jumping", true);
+                    bunny.animator.SetBool("Idling", false);
+                    bunny.animator.SetInteger("Direction", 1);
 
                 }
                 else if (bunny.moveDirection == 2)
                 {
                     bunny.movement.x = 1; // move right
+                    bunny.animator.SetBool("Jumping", true);
+                    bunny.animator.SetBool("Idling", false);
+                    bunny.animator.SetInteger("Direction", 2);
 
                 }
                 else if (bunny.moveDirection == 3)
                 {
                     bunny.movement.x = -1; // move left
+                    bunny.animator.SetBool("Jumping", true);
+                    bunny.animator.SetBool("Idling", false);
+                    bunny.animator.SetInteger("Direction", 3);
 
                 }
             }

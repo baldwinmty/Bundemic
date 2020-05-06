@@ -14,10 +14,7 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: Healthy
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: Vaccinated
-    m_EventTreshold: 0
-  - m_ConditionMode: 3
+  - m_ConditionMode: 1
     m_ConditionEvent: Jumping
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
@@ -27,10 +24,10 @@ AnimatorStateTransition:
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0
-  m_TransitionOffset: 0
+  m_TransitionOffset: 0.6426064
   m_ExitTime: 0.75
   m_HasExitTime: 0
-  m_HasFixedDuration: 0
+  m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 0
@@ -164,10 +161,10 @@ AnimatorStateMachine:
     m_Position: {x: -220, y: 330, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8212185500237753712}
-    m_Position: {x: 270, y: 240, z: 0}
+    m_Position: {x: 270, y: 170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6181991512151803221}
-    m_Position: {x: 270, y: 180, z: 0}
+    m_Position: {x: 270, y: 220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7605150210458793362}
     m_Position: {x: -220, y: -140, z: 0}
@@ -475,13 +472,10 @@ AnimatorStateTransition:
     m_ConditionEvent: Direction
     m_EventTreshold: 1
   - m_ConditionMode: 1
-    m_ConditionEvent: Healthy
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: Vaccinated
-    m_EventTreshold: 0
-  - m_ConditionMode: 3
     m_ConditionEvent: Jumping
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: Healthy
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4187737156919508304}
@@ -490,10 +484,10 @@ AnimatorStateTransition:
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0
-  m_TransitionOffset: 0
+  m_TransitionOffset: 0.63648635
   m_ExitTime: 0.75
   m_HasExitTime: 0
-  m_HasFixedDuration: 0
+  m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 0
@@ -733,19 +727,19 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: Jumping
-    m_Type: 1
+    m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: Idling
-    m_Type: 1
+    m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: Biting
-    m_Type: 1
+    m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -959,10 +953,7 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: Healthy
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: Vaccinated
-    m_EventTreshold: 0
-  - m_ConditionMode: 3
+  - m_ConditionMode: 1
     m_ConditionEvent: Jumping
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
@@ -972,10 +963,10 @@ AnimatorStateTransition:
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_ExitTime: 0.75
+  m_TransitionOffset: 0.8422805
+  m_ExitTime: 0.75000006
   m_HasExitTime: 0
-  m_HasFixedDuration: 0
+  m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 0
@@ -1149,10 +1140,7 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: Healthy
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: Vaccinated
-    m_EventTreshold: 0
-  - m_ConditionMode: 3
+  - m_ConditionMode: 1
     m_ConditionEvent: Jumping
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
@@ -1161,11 +1149,11 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0
   m_HasExitTime: 0
-  m_HasFixedDuration: 0
+  m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 0
