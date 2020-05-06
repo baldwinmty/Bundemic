@@ -56,6 +56,15 @@ public class BunnyAI : MonoBehaviour
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
 
+    void MovementSwitch(Collision collision)
+    {
+        Vector3 v = collision.gameObject.GetComponent<BunnyAI>().movement;
+
+        movement = Vector3.zero;
+
+        movement = v;
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Carrot")) // may change later
@@ -75,11 +84,14 @@ public class BunnyAI : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.CompareTag("Bunny"))
+        {
+            MovementSwitch(collision);
+        }
         // when this sick bunny makes contact with another healthy bunny
         if(collision.gameObject.CompareTag("Bunny") && !healthyBunny && !collision.gameObject.GetComponent<BunnyAI>().vaccinatedBunny && collision.gameObject.GetComponent<BunnyAI>().healthyBunny)
         {
             collision.gameObject.GetComponent<BunnyAI>().healthyBunny = false;
-
         }
 
         if(collision.gameObject.CompareTag("Fence")) // may change later
