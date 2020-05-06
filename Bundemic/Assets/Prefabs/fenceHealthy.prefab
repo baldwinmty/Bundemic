@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3146907504693573162}
   m_Layer: 0
   m_Name: fenceHealthy
-  m_TagString: Untagged
+  m_TagString: Fence
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e34c505984f4114daf8135178b81ec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DegradingHealth: 1
+  DegradingHealth: 0
   startingTime: 1
   health: 100
   Damage: 10
@@ -61,6 +61,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: fenceHealthy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1973109456474152909, guid: 57d2342da5fc9134ea8784d7e4d26ec1,
+        type: 3}
+      propertyPath: m_TagString
+      value: Fence
       objectReference: {fileID: 0}
     - target: {fileID: 3259125363729362398, guid: 57d2342da5fc9134ea8784d7e4d26ec1,
         type: 3}
