@@ -21,6 +21,7 @@ public class BunnyAI : MonoBehaviour
     public int newDirection;
     public float moveSpeed;
     public Vector3 movement;
+    public Vector3 movementSave;
 
     public IDecision currentDecision;
     IDecision BunnyAi;
@@ -371,12 +372,16 @@ public class KeepWalking : IDecision
 
     public IDecision MakeDecision()
     {
-        
+        //bunny.moveDirection = Random.Range(0, 4);
+
         if (bunny.idleTimer <= 0)
         {
+            //movement needs to be present becuase timer would've reseted by now
+            bunny.movement = bunny.movementSave;
             //changes its target position of travel here
-            if (bunny.stepTimer <= 0)
+            if (bunny.stepTimer <= 0)//if bunny is done Idling/ If bunny 
             {
+                //movement is at 0 rn
                 bunny.idleTimer = bunny.startIdleTimer;
                 bunny.stepTimer = bunny.startStepTimer;
 
@@ -420,17 +425,26 @@ public class KeepWalking : IDecision
                     bunny.animator.SetInteger("Direction", 3);
 
                 }
+
+                bunny.movementSave = bunny.movement;
             }
-            else
+            else // continues to move in said direction
+            {
                 bunny.stepTimer -= Time.deltaTime;
+
+            }
+        }
+        else // stand still/Idle
+        {
             if (bunny.stepTimer == 0)
             {
                 bunny.animator.SetBool("Jumping", false);
                 bunny.animator.SetBool("Idling", true);
             }
-        }
-        else
             bunny.idleTimer -= Time.deltaTime;
+            bunny.movement = Vector3.zero;
+            // it would have to go back to 
+        }
         return null;
     }
     
