@@ -31,6 +31,10 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("GC mainmenu scene");
     }
+    public void Cutscene()
+    {
+        SceneManager.LoadScene("Cutscene");
+    }
 
     public void QuitGame ()
     {
