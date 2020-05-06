@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tyler Scene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/gameover.unity
+    guid: f2d0f814d2feb634ca6119fb20aca87a
+  - enabled: 1
+    path: Assets/Scenes/Cutscene.unity
+    guid: e95e17c71f9191e40a15351033271fe6
   m_configObjects: {}
