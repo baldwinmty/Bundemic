@@ -26,7 +26,7 @@ public class BunnyAI : MonoBehaviour
     public float moveSpeed;
     public Vector3 movement;
     public Vector3 movementSave;
-    int infectionMark = 0;
+    public int infectionMark = 0;
 
     public IDecision currentDecision;
     IDecision BunnyAi;
