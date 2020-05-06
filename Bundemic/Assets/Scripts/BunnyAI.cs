@@ -9,7 +9,8 @@ public class BunnyAI : MonoBehaviour
     public bool healthyBunny, vaccinatedBunny;
     public bool carrotSpotted;
     public bool trapped;
-
+    public AudioSource hop;
+    public AudioClip sneeze;
 
     public float stepTimer, idleTimer, biteTimer, carrotTimer;
     public float startStepTimer, startIdleTimer, startBiteTimer, startCarrotTimer;
@@ -29,6 +30,7 @@ public class BunnyAI : MonoBehaviour
 
     private void Start()
     {
+        hop = GetComponent<AudioSource>();
         animator.GetComponent<Animator>();
         animator.SetBool("Healthy", healthyBunny);
         vaccinatedBunny = false;
@@ -71,6 +73,10 @@ public class BunnyAI : MonoBehaviour
         {
             animator.SetBool("GettingInfected", false);
         }
+        if (stepTimer == startStepTimer && idleTimer > 0 && idleTimer <0.017)
+        { 
+            hop.Play(); 
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -98,6 +104,7 @@ public class BunnyAI : MonoBehaviour
             collision.gameObject.GetComponent<BunnyAI>().idleTimer = 2;
             collision.gameObject.GetComponent<BunnyAI>().healthyBunny = false;
             collision.gameObject.GetComponent <Animator>().SetBool("GettingInfected", true);
+            AudioSource.PlayClipAtPoint(sneeze, transform.position);
         }
 
         if(collision.gameObject.CompareTag("Fence")) // may change later
@@ -386,11 +393,13 @@ public class KeepWalking : IDecision
 
         if (bunny.idleTimer <= 0)
         {
+           
             //movement needs to be present becuase timer would've reseted by now
             bunny.movement = bunny.movementSave;
             //changes its target position of travel here
             if (bunny.stepTimer <= 0)//if bunny is done Idling/ If bunny 
             {
+                
                 //movement is at 0 rn
                 bunny.idleTimer = bunny.startIdleTimer;
                 bunny.stepTimer = bunny.startStepTimer;
@@ -399,6 +408,7 @@ public class KeepWalking : IDecision
                 while (bunny.newDirection == bunny.moveDirection)
                 {
                     bunny.moveDirection = Random.Range(0, 4);
+                    
                 }
 
                 bunny.movement = Vector3.zero;
