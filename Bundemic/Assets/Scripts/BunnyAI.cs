@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BunnyAI : MonoBehaviour
 {
+    public Animator animator;
     public bool healthyBunny, vaccinatedBunny;
     public bool carrotSpotted;
     public bool trapped;
@@ -13,10 +14,11 @@ public class BunnyAI : MonoBehaviour
     public float startStepTimer, startIdleTimer, startBiteTimer, startCarrotTimer;
 
     public List<GameObject> carrots = new List<GameObject>();
-    public List<GameObject> fence = new List<GameObject>();
+    public GameObject fence;
 
     Rigidbody rb;
     public int moveDirection;
+    public int newDirection;
     public float moveSpeed;
     public Vector3 movement;
 
@@ -26,17 +28,22 @@ public class BunnyAI : MonoBehaviour
 
     private void Start()
     {
+        animator.GetComponent<Animator>();
+        animator.SetBool("Healthy", true);
         vaccinatedBunny = false;
         rb = GetComponent<Rigidbody>();
+        biteTimer = startBiteTimer;
+        stepTimer = startStepTimer;
+        idleTimer = startIdleTimer;
+        carrotTimer = startCarrotTimer;
+        BunnyAi = new DidIMeetFence(new BiteFence(this), new DoISeeCarrot(new AmINearCarrot(new EatCarrot(this), new GoToCarrot(this), this), new KeepWalking(this), this), this);
     }
 
     private void Update()
     {
-        BunnyAi = new DidIMeetFence(new BiteFence(this), new DoISeeCarrot(new AmINearCarrot(new EatCarrot(this), new GoToCarrot(this), this), new KeepWalking(this), this), this);
-
         currentDecision = BunnyAi;
 
-        if (currentDecision != null)
+        while (currentDecision != null)
         {
             currentDecision = currentDecision.MakeDecision();
         }
@@ -50,42 +57,43 @@ public class BunnyAI : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "carrot") // may change later
+        if (other.gameObject.CompareTag("Carrot")) // may change later
         {
-            fence.Add(other.gameObject);
+            carrots.Add(other.gameObject);
             carrotSpotted = true;
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "carrot") // may change later
+        if (other.gameObject.CompareTag("Carrot")) // may change later
         {
-            fence.Remove(other.gameObject);
+            carrots.Remove(other.gameObject);
         }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Rabbit" && !healthyBunny && collision.gameObject.GetComponent<BunnyAI>().vaccinatedBunny) // when this sick bunny makes contact with another healthy bunny
+        // when this sick bunny makes contact with another healthy bunny
+        if(collision.gameObject.CompareTag("Bunny") && !healthyBunny && !collision.gameObject.GetComponent<BunnyAI>().vaccinatedBunny && collision.gameObject.GetComponent<BunnyAI>().healthyBunny)
         {
             collision.gameObject.GetComponent<BunnyAI>().healthyBunny = false;
 
         }
 
-        if(collision.gameObject.name == "Fence") // may change later
+        if(collision.gameObject.CompareTag("Fence")) // may change later
         {
-            fence.Add(collision.gameObject);
+            fence = collision.gameObject;
             trapped = true;
         }
     }
 
     void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.tag == "Fence") // may change later
+        if (collision.gameObject.CompareTag("Fence")) // may change later
         {
-            fence.Remove(collision.gameObject);
-            trapped = true;
+            fence = null;
+            trapped = false;
         }
     }
 }
@@ -187,10 +195,19 @@ public class AmINearCarrot : IDecision
             }
         }
 
-        if (Vector3.Distance(bunny.transform.position, bunny.carrots[index].gameObject.transform.position) < 1.5f) //check the distance between all carrots and player/collider dependant
+        if (bunny.carrots.Count > 0)
         {
-            value = true;
-            this.trueBranch = trueBranch;
+            if (Vector3.Distance(bunny.transform.position, bunny.carrots[index].gameObject.transform.position) < 1.5f) //check the distance between all carrots and player/collider dependant
+            {
+                value = true;
+                this.trueBranch = trueBranch;
+            }
+            else
+            {
+                value = false;
+                this.falseBranch = falseBranch;
+            }
+
         }
         else
         {
@@ -223,26 +240,10 @@ public class BiteFence : IDecision
 
     public IDecision MakeDecision()
     {
-
-        float minDistance = Mathf.Infinity;
-        float newDist = 0;
-        int index = 0;
-
-        for (int i = 0; i < bunny.fence.Capacity; i++)
-        {
-            newDist = Vector3.Distance(bunny.transform.position, bunny.fence[i].gameObject.transform.position); // looks for the distance betw bunny and all carrots
-
-            if (newDist < minDistance)
-            {
-                minDistance = newDist;
-                index = i;
-            }
-        }
-
         if (bunny.biteTimer <= 0)
         {
             // fence takes damage
-            //bunny.fence[index].GetComponent<>().
+            bunny.fence.GetComponent<TrapHealth>().health--;
             bunny.biteTimer = bunny.startBiteTimer;
         }
         else
@@ -280,14 +281,28 @@ public class GoToCarrot : IDecision
         //move to carrot
         //checks coordinates to see if the carrots z is higher than its own z. same thing with x.
 
+        bunny.movement = Vector3.zero;
+
         if (bunny.transform.position.z < bunny.carrots[index].gameObject.transform.position.z)
+        {
             bunny.movement.z = 1; //move up
+
+        }
         else if(bunny.transform.position.z > bunny.carrots[index].gameObject.transform.position.z)
+        {
             bunny.movement.z = -1; //move down
+
+        }
         else if (bunny.transform.position.x < bunny.carrots[index].gameObject.transform.position.x)
+        {
             bunny.movement.x = 1; //move right
+
+        }
         else if (bunny.transform.position.x > bunny.carrots[index].gameObject.transform.position.x)
+        {
             bunny.movement.x = -1; //move left
+
+        }
 
         return null;
     }
@@ -345,51 +360,66 @@ public class KeepWalking : IDecision
 
     public IDecision MakeDecision()
     {
+        
         if (bunny.idleTimer <= 0)
         {
-            int newDirection = bunny.moveDirection;
-            while (newDirection == bunny.moveDirection)
-            {
-                // rng goes here
-                newDirection = Random.Range(0, 4);
-            }
             //changes its target position of travel here
             if (bunny.stepTimer <= 0)
             {
                 bunny.idleTimer = bunny.startIdleTimer;
                 bunny.stepTimer = bunny.startStepTimer;
-            }
-            else
-            {
-                bunny.stepTimer -= Time.deltaTime;
-                if (newDirection == 0)
+
+                bunny.newDirection = bunny.moveDirection;
+                while (bunny.newDirection == bunny.moveDirection)
+                {
+                    bunny.moveDirection = Random.Range(0, 4);
+                }
+
+                bunny.movement = Vector3.zero;
+
+                if (bunny.moveDirection == 0) // move up
                 {
                     bunny.movement.z = 1;
+                    bunny.animator.SetBool("Jumping", true);
+                    bunny.animator.SetBool("Idling", false);
+                    bunny.animator.SetInteger("Direction", 0);
+
                 }
-                else if (newDirection == 1)
+                else if (bunny.moveDirection == 1)
                 {
-                    bunny.movement.z = -1;
+                    bunny.movement.z = -1; // move down
+                    bunny.animator.SetBool("Jumping", true);
+                    bunny.animator.SetBool("Idling", false);
+                    bunny.animator.SetInteger("Direction", 1);
 
                 }
-                else if (newDirection == 2)
+                else if (bunny.moveDirection == 2)
                 {
-                    bunny.movement.x = 1;
+                    bunny.movement.x = 1; // move right
+                    bunny.animator.SetBool("Jumping", true);
+                    bunny.animator.SetBool("Idling", false);
+                    bunny.animator.SetInteger("Direction", 2);
 
                 }
-                else if (newDirection == 3)
+                else if (bunny.moveDirection == 3)
                 {
-                    bunny.movement.x = -1;
+                    bunny.movement.x = -1; // move left
+                    bunny.animator.SetBool("Jumping", true);
+                    bunny.animator.SetBool("Idling", false);
+                    bunny.animator.SetInteger("Direction", 3);
 
                 }
-                //make the bunny move around here
-
+            }
+            else
+                bunny.stepTimer -= Time.deltaTime;
+            if (bunny.stepTimer == 0)
+            {
+                bunny.animator.SetBool("Jumping", false);
+                bunny.animator.SetBool("Idling", true);
             }
         }
         else
-        {
             bunny.idleTimer -= Time.deltaTime;
-        }
-
         return null;
     }
     
