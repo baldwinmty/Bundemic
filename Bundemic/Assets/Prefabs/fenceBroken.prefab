@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!65 &2287670937703254433
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3533627144582145902}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0240958, y: 2.450242, z: 5.7199426}
+  m_Center: {x: 0, y: 0.8728513, z: 0}
 --- !u!1 &4882278455882991080
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,8 +23,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1671179526481192920}
   m_Layer: 0
-  m_Name: fenceBrokenRotated 1
-  m_TagString: Untagged
+  m_Name: fenceBroken
+  m_TagString: Fence
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,6 +113,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddcccd38189e14d47b576fd2e095e4f7, type: 3}
+--- !u!1 &3533627144582145902 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3679531333912917190, guid: ddcccd38189e14d47b576fd2e095e4f7,
+    type: 3}
+  m_PrefabInstance: {fileID: 151333938532668328}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &527676462621906301 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 381411341951993557, guid: ddcccd38189e14d47b576fd2e095e4f7,

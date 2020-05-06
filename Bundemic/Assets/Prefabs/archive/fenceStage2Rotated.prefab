@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1035245571355414588}
   - component: {fileID: 6728772808402562245}
   - component: {fileID: 4692603506995301901}
+  - component: {fileID: 534866115019229898}
   m_Layer: 0
   m_Name: fenceStage2Rotated
   m_TagString: Fence
@@ -99,3 +100,16 @@ MonoBehaviour:
   Injured: {fileID: 4998346029732878361}
   Destroyed: {fileID: 3913948417885886670, guid: d481e4e3ba35b8745ac9f80d97653b01,
     type: 3}
+--- !u!65 &534866115019229898
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4998346029732878361}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.506356, y: 3.0084949, z: 5.591226}
+  m_Center: {x: 0, y: 0, z: 0}
