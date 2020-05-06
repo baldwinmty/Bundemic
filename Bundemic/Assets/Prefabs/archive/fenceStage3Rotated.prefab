@@ -41,7 +41,7 @@ PrefabInstance:
     - target: {fileID: -6121529040533065703, guid: ea4ab07cf8051dd44bacd58aadcd91a0,
         type: 3}
       propertyPath: DegradingHealth
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 381411341951993557, guid: ea4ab07cf8051dd44bacd58aadcd91a0,
         type: 3}
