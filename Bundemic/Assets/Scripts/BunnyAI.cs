@@ -63,6 +63,10 @@ public class BunnyAI : MonoBehaviour
             animator.SetBool("Jumping", true);
             animator.SetBool("Idling", false);
         }
+        if(!healthyBunny)
+        {
+            animator.SetBool("Healthy", false);
+        }
     }
 
     void OnTriggerEnter(Collider other)
