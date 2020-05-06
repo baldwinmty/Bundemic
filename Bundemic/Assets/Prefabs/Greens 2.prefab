@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7525377316011835092}
   - component: {fileID: 1527991803836744930}
   - component: {fileID: 5046297780871378971}
+  - component: {fileID: 3637691199704937208}
   m_Layer: 0
   m_Name: Greens 2
   m_TagString: Carrot
@@ -79,3 +80,21 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &3637691199704937208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6788291420894268615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e34c505984f4114daf8135178b81ec9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DegradingHealth: 1
+  startingTime: 1
+  health: 50
+  Damage: 5
+  Injured: {fileID: 0}
+  Destroyed: {fileID: 0}
