@@ -11,6 +11,10 @@ GameObject:
   - component: {fileID: 6708660726419158049}
   - component: {fileID: 3700802797419443402}
   - component: {fileID: 5288736919855094212}
+  - component: {fileID: -6154362354514004356}
+  - component: {fileID: -598417345776200989}
+  - component: {fileID: 5800179021924686408}
+  - component: {fileID: -8819820009398018331}
   m_Layer: 0
   m_Name: PurpleBunny
   m_TagString: Bunny
@@ -102,3 +106,75 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-6154362354514004356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5692577395148832936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a4d9af663e5824a9ff3652db2af9ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthyBunny: 0
+  vaccinatedBunny: 0
+  carrotSpotted: 0
+  trapped: 0
+  stepTimer: 0
+  idleTimer: 0
+  biteTimer: 0
+  carrotTimer: 0
+  startStepTimer: 3
+  startIdleTimer: 3
+  startBiteTimer: 3
+  startCarrotTimer: 3
+  carrots: []
+  fence: {fileID: 0}
+  moveDirection: 0
+  newDirection: 0
+  moveSpeed: 0.1
+  movement: {x: 0, y: 0, z: 0}
+--- !u!54 &-598417345776200989
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5692577395148832936}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!65 &5800179021924686408
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5692577395148832936}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.21680994, y: 0.2573077, z: 0.10616093}
+  m_Center: {x: 0.014447837, y: -0.019754589, z: 0.00004794477}
+--- !u!135 &-8819820009398018331
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5692577395148832936}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.7
+  m_Center: {x: 0, y: 0, z: 0}

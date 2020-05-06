@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8651429346014510307}
   - component: {fileID: 3111006906242449434}
   - component: {fileID: -6121529040533065703}
+  - component: {fileID: 4723463802676065485}
   m_Layer: 0
   m_Name: fenceBroken
   m_TagString: Fence
@@ -98,3 +99,16 @@ MonoBehaviour:
   Damage: 10
   Injured: {fileID: 4998346029732878361, guid: feb57a6b010dfc64c9f1ae06dd208732, type: 3}
   Destroyed: {fileID: 3679531333912917190}
+--- !u!65 &4723463802676065485
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3679531333912917190}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0240955, y: 2.7773533, z: 5.719942}
+  m_Center: {x: 0, y: 1.0364075, z: 0}

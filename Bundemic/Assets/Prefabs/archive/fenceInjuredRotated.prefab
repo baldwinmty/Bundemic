@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7731129505775127584}
   m_Layer: 0
   m_Name: fenceInjuredRotated
-  m_TagString: Untagged
+  m_TagString: Fence
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,6 +49,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3913948417885886670, guid: d481e4e3ba35b8745ac9f80d97653b01,
         type: 3}
+    - target: {fileID: 4692603506995301901, guid: be734a278a5bac24eb36a9dd03ae5b9e,
+        type: 3}
+      propertyPath: DegradingHealth
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4998346029732878361, guid: be734a278a5bac24eb36a9dd03ae5b9e,
         type: 3}
       propertyPath: m_Name
