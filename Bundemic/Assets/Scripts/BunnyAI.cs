@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BunnyAI : MonoBehaviour
 {
+    Rigidbody rb;
     public Animator animator;
     public bool healthyBunny, vaccinatedBunny;
     public bool carrotSpotted;
@@ -16,7 +17,6 @@ public class BunnyAI : MonoBehaviour
     public List<GameObject> carrots = new List<GameObject>();
     public GameObject fence;
 
-    Rigidbody rb;
     public int moveDirection;
     public int newDirection;
     public float moveSpeed;
@@ -243,6 +243,7 @@ public class BiteFence : IDecision
         if (bunny.biteTimer <= 0)
         {
             // fence takes damage
+            bunny.movement = Vector3.zero;
             bunny.fence.GetComponent<TrapHealth>().health--;
             bunny.biteTimer = bunny.startBiteTimer;
         }
@@ -286,22 +287,30 @@ public class GoToCarrot : IDecision
         if (bunny.transform.position.z < bunny.carrots[index].gameObject.transform.position.z)
         {
             bunny.movement.z = 1; //move up
-
+            bunny.animator.SetBool("Jumping", true);
+            bunny.animator.SetBool("Idling", false);
+            bunny.animator.SetInteger("Direction", 0);
         }
         else if(bunny.transform.position.z > bunny.carrots[index].gameObject.transform.position.z)
         {
             bunny.movement.z = -1; //move down
-
+            bunny.animator.SetBool("Jumping", true);
+            bunny.animator.SetBool("Idling", false);
+            bunny.animator.SetInteger("Direction", 1);
         }
         else if (bunny.transform.position.x < bunny.carrots[index].gameObject.transform.position.x)
         {
             bunny.movement.x = 1; //move right
-
+            bunny.animator.SetBool("Jumping", true);
+            bunny.animator.SetBool("Idling", false);
+            bunny.animator.SetInteger("Direction", 2);
         }
         else if (bunny.transform.position.x > bunny.carrots[index].gameObject.transform.position.x)
         {
             bunny.movement.x = -1; //move left
-
+            bunny.animator.SetBool("Jumping", true);
+            bunny.animator.SetBool("Idling", false);
+            bunny.animator.SetInteger("Direction", 3);
         }
 
         return null;
@@ -338,7 +347,9 @@ public class EatCarrot : IDecision
         {
             // carrot takes damage
 
-            //bunny.carrots[index].GetComponent<>().
+            bunny.carrots[index].GetComponent<TrapHealth>().health--;
+
+            bunny.movement = Vector3.zero;
 
             bunny.carrotTimer = bunny.startCarrotTimer;
         }
