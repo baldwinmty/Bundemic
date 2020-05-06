@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 6728772808402562245}
   - component: {fileID: 4692603506995301901}
   m_Layer: 0
-  m_Name: Fence 2
-  m_TagString: Untagged
+  m_Name: fenceStage2Rotated
+  m_TagString: Fence
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,9 +93,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DegradingHealth: 1
-  startingTime: 3
+  startingTime: 1
   health: 50
   Damage: 10
   Injured: {fileID: 4998346029732878361}
-  Destroyed: {fileID: 3679531333912917190, guid: ea4ab07cf8051dd44bacd58aadcd91a0,
+  Destroyed: {fileID: 3913948417885886670, guid: d481e4e3ba35b8745ac9f80d97653b01,
     type: 3}
