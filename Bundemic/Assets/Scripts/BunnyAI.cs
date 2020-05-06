@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BunnyAI : MonoBehaviour
 {
@@ -18,12 +19,14 @@ public class BunnyAI : MonoBehaviour
 
     public List<GameObject> carrots = new List<GameObject>();
     public GameObject fence;
+    private GameObject[] totalBunnies;
 
     public int moveDirection;
     public int newDirection;
     public float moveSpeed;
     public Vector3 movement;
     public Vector3 movementSave;
+    public int infectionMark = 0;
 
     public IDecision currentDecision;
     IDecision BunnyAi;
@@ -45,11 +48,30 @@ public class BunnyAI : MonoBehaviour
 
     private void Update()
     {
-        currentDecision = BunnyAi;
+        totalBunnies = GameObject.FindGameObjectsWithTag("Bunny");
 
-        while (currentDecision != null)
+        for (int i = 0; i < totalBunnies.Length; i++)
         {
-            currentDecision = currentDecision.MakeDecision();
+            if (!totalBunnies[i].GetComponent<BunnyAI>().healthyBunny)
+            {
+                infectionMark++;
+            }
+        }
+
+        if (infectionMark != totalBunnies.Length)
+        {
+            infectionMark = 0;
+
+            currentDecision = BunnyAi;
+
+            while (currentDecision != null)
+            {
+                currentDecision = currentDecision.MakeDecision();
+            }
+        }
+        else
+        {
+            SceneManager.LoadScene("gameover");
         }
     }
 
