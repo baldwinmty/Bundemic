@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2168473580952018718}
   m_Layer: 0
   m_Name: fenceStage3
-  m_TagString: Untagged
+  m_TagString: Fence
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,6 +38,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2168473580952018718}
     m_Modifications:
+    - target: {fileID: -6121529040533065703, guid: ea4ab07cf8051dd44bacd58aadcd91a0,
+        type: 3}
+      propertyPath: DegradingHealth
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 381411341951993557, guid: ea4ab07cf8051dd44bacd58aadcd91a0,
         type: 3}
       propertyPath: m_LocalPosition.x
