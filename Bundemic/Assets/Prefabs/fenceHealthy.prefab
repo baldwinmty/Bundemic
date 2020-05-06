@@ -140,10 +140,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e34c505984f4114daf8135178b81ec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DegradingHealth: 0
+  DegradingHealth: 1
   startingTime: 1
   health: 100
-  Damage: 10
+  Damage: 1
   Injured: {fileID: 1913285183142151819, guid: 8add0031638fa184aabbf9a5390ade6f, type: 3}
   Destroyed: {fileID: 4882278455882991080, guid: cfc67a1f2d3f0b840a55d9e9628a2afa,
     type: 3}
