@@ -118,6 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8a4d9af663e5824a9ff3652db2af9ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 1359219255678211394}
   healthyBunny: 1
   vaccinatedBunny: 0
   carrotSpotted: 0
@@ -136,6 +137,7 @@ MonoBehaviour:
   newDirection: 0
   moveSpeed: 0.1
   movement: {x: 0, y: 0, z: 0}
+  movementSave: {x: 0, y: 0, z: 0}
 --- !u!54 &567053110115203126
 Rigidbody:
   m_ObjectHideFlags: 0
