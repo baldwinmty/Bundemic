@@ -22,6 +22,10 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("credits");
     }
+    public void GameOver()
+    {
+        SceneManager.LoadScene("gameover");
+    }
 
     public void BackToMenu()
     {
