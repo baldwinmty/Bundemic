@@ -94,9 +94,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DegradingHealth: 1
-  startingTime: 3
+  startingTime: 1
   health: 20
-  Damage: 10
+  Damage: 1
   Injured: {fileID: 4998346029732878361, guid: feb57a6b010dfc64c9f1ae06dd208732, type: 3}
   Destroyed: {fileID: 3679531333912917190}
 --- !u!65 &4723463802676065485

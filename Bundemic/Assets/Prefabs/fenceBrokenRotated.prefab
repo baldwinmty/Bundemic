@@ -51,6 +51,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1671179526481192920}
     m_Modifications:
+    - target: {fileID: -6121529040533065703, guid: ddcccd38189e14d47b576fd2e095e4f7,
+        type: 3}
+      propertyPath: startingTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6121529040533065703, guid: ddcccd38189e14d47b576fd2e095e4f7,
+        type: 3}
+      propertyPath: Damage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 381411341951993557, guid: ddcccd38189e14d47b576fd2e095e4f7,
         type: 3}
       propertyPath: m_LocalPosition.x

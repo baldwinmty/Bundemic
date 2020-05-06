@@ -9,8 +9,10 @@ public class BunnyAI : MonoBehaviour
     public bool healthyBunny, vaccinatedBunny;
     public bool carrotSpotted;
     public bool trapped;
+    public AudioSource hop;
+    public AudioClip sneeze;
+    public ParticleSystem infect;
 
-    [HideInInspector]
     public float stepTimer, idleTimer, biteTimer, carrotTimer;
     public float startStepTimer, startIdleTimer, startBiteTimer, startCarrotTimer;
 
@@ -29,8 +31,9 @@ public class BunnyAI : MonoBehaviour
 
     private void Start()
     {
+        hop = GetComponent<AudioSource>();
         animator.GetComponent<Animator>();
-        animator.SetBool("Healthy", true);
+        animator.SetBool("Healthy", healthyBunny);
         vaccinatedBunny = false;
         rb = GetComponent<Rigidbody>();
         biteTimer = startBiteTimer;
@@ -48,12 +51,33 @@ public class BunnyAI : MonoBehaviour
         {
             currentDecision = currentDecision.MakeDecision();
         }
-        
     }
 
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        if (stepTimer > 0 || idleTimer > 0)
+        {
+            animator.SetBool("Jumping", false);
+            animator.SetBool("Idling", true);
+        }
+        if (stepTimer < 0 || idleTimer < 0)
+        {
+            animator.SetBool("Jumping", true);
+            animator.SetBool("Idling", false);
+        }
+        if(!healthyBunny)
+        {
+            animator.SetBool("Healthy", false);
+        }
+        if (idleTimer < 0)
+        {
+            animator.SetBool("GettingInfected", false);
+        }
+        if (stepTimer == startStepTimer && idleTimer > 0 && idleTimer <0.017)
+        { 
+            hop.Play(); 
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -78,8 +102,11 @@ public class BunnyAI : MonoBehaviour
         // when this sick bunny makes contact with another healthy bunny
         if(collision.gameObject.CompareTag("Bunny") && !healthyBunny && !collision.gameObject.GetComponent<BunnyAI>().vaccinatedBunny && collision.gameObject.GetComponent<BunnyAI>().healthyBunny)
         {
+            collision.gameObject.GetComponent<BunnyAI>().idleTimer = 2;
             collision.gameObject.GetComponent<BunnyAI>().healthyBunny = false;
-
+            collision.gameObject.GetComponent <Animator>().SetBool("GettingInfected", true);
+            infect.Play();
+            AudioSource.PlayClipAtPoint(sneeze, transform.position);
         }
 
         if(collision.gameObject.CompareTag("Fence")) // may change later
@@ -288,29 +315,21 @@ public class GoToCarrot : IDecision
         if (bunny.transform.position.z < bunny.carrots[index].gameObject.transform.position.z)
         {
             bunny.movement.z = 1; //move up
-            bunny.animator.SetBool("Jumping", true);
-            bunny.animator.SetBool("Idling", false);
             bunny.animator.SetInteger("Direction", 0);
         }
         else if(bunny.transform.position.z > bunny.carrots[index].gameObject.transform.position.z)
         {
             bunny.movement.z = -1; //move down
-            bunny.animator.SetBool("Jumping", true);
-            bunny.animator.SetBool("Idling", false);
             bunny.animator.SetInteger("Direction", 1);
         }
         else if (bunny.transform.position.x < bunny.carrots[index].gameObject.transform.position.x)
         {
             bunny.movement.x = 1; //move right
-            bunny.animator.SetBool("Jumping", true);
-            bunny.animator.SetBool("Idling", false);
             bunny.animator.SetInteger("Direction", 2);
         }
         else if (bunny.transform.position.x > bunny.carrots[index].gameObject.transform.position.x)
         {
             bunny.movement.x = -1; //move left
-            bunny.animator.SetBool("Jumping", true);
-            bunny.animator.SetBool("Idling", false);
             bunny.animator.SetInteger("Direction", 3);
         }
 
@@ -376,11 +395,13 @@ public class KeepWalking : IDecision
 
         if (bunny.idleTimer <= 0)
         {
+           
             //movement needs to be present becuase timer would've reseted by now
             bunny.movement = bunny.movementSave;
             //changes its target position of travel here
             if (bunny.stepTimer <= 0)//if bunny is done Idling/ If bunny 
             {
+                
                 //movement is at 0 rn
                 bunny.idleTimer = bunny.startIdleTimer;
                 bunny.stepTimer = bunny.startStepTimer;
@@ -389,6 +410,7 @@ public class KeepWalking : IDecision
                 while (bunny.newDirection == bunny.moveDirection)
                 {
                     bunny.moveDirection = Random.Range(0, 4);
+                    
                 }
 
                 bunny.movement = Vector3.zero;
@@ -396,32 +418,24 @@ public class KeepWalking : IDecision
                 if (bunny.moveDirection == 0) // move up
                 {
                     bunny.movement.z = 1;
-                    bunny.animator.SetBool("Jumping", true);
-                    bunny.animator.SetBool("Idling", false);
                     bunny.animator.SetInteger("Direction", 0);
 
                 }
                 else if (bunny.moveDirection == 1)
                 {
                     bunny.movement.z = -1; // move down
-                    bunny.animator.SetBool("Jumping", true);
-                    bunny.animator.SetBool("Idling", false);
                     bunny.animator.SetInteger("Direction", 1);
 
                 }
                 else if (bunny.moveDirection == 2)
                 {
                     bunny.movement.x = 1; // move right
-                    bunny.animator.SetBool("Jumping", true);
-                    bunny.animator.SetBool("Idling", false);
                     bunny.animator.SetInteger("Direction", 2);
 
                 }
                 else if (bunny.moveDirection == 3)
                 {
                     bunny.movement.x = -1; // move left
-                    bunny.animator.SetBool("Jumping", true);
-                    bunny.animator.SetBool("Idling", false);
                     bunny.animator.SetInteger("Direction", 3);
 
                 }
@@ -431,16 +445,10 @@ public class KeepWalking : IDecision
             else // continues to move in said direction
             {
                 bunny.stepTimer -= Time.deltaTime;
-
             }
         }
         else // stand still/Idle
         {
-            if (bunny.stepTimer == 0)
-            {
-                bunny.animator.SetBool("Jumping", false);
-                bunny.animator.SetBool("Idling", true);
-            }
             bunny.idleTimer -= Time.deltaTime;
             bunny.movement = Vector3.zero;
             // it would have to go back to 
